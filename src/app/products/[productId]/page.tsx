@@ -13,9 +13,8 @@ const products = [
 ];
 
 const ProductDetail = () => {
-  const pathname = usePathname(); // Get the current pathname (e.g., /products/1)
+  const pathname = usePathname();
   
-  // Extract the ID from the pathname (e.g., /products/1 -> id = 1)
   const id = pathname?.split('/').pop();
 
   const product = products.find((p) => p.id.toString() === id);

@@ -1,7 +1,7 @@
 function About() {
     return (
       <div className="flex">
-        kle
+        kek
       </div>
     );
   }

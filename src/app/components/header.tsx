@@ -5,8 +5,10 @@ function Header() {
   return (
     <header className="absolute top-0 left-0 w-full p-4 flex justify-around items-center">
         <div>
-        <img src="/smart.png" />
-        <h1 className="text-2xl font-bold text-white">ჭკვიანი სარკე</h1>
+          <a href="/">
+            <img src="/smart.png" />
+            <h1 className="text-2xl font-bold text-white">ჭკვიანი სარკე</h1>
+          </a>
         </div>
         <nav>
           <ul className="flex space-x-4 mb-5">

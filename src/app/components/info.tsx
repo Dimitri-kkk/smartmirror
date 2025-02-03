@@ -1,27 +1,9 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { MonitorSmartphone, CheckCircle, Award, Truck } from "lucide-react"
+import { Award, CheckCircle, MonitorSmartphone, Truck } from 'lucide-react'
+import React from 'react'
 
-export function SpecialOffer() {
+function Info() {
   return (
-    <main className="min-h-screen mt-20">
-      <section className="relative h-[600px] overflow-hidden">
-        <div className="container mx-auto px-4 h-full flex flex-col justify-center"
-        style={{ backgroundImage: "url('/meoremirror.png')", backgroundPosition: "center", backgroundSize: "cover", backgroundAttachment: "fixed" }}
-        >
-          <div className="max-w-xl text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 ml-20">სპეციალური შემოთავაზება</h1>
-            <p className="text-lg mb-8 ml-20">
-              შეუკვეთე აბაზანის ჭკვიანი სარკე ჩვენთან და მიიღე აბაზანის აქსესუარებზე 20%-იანი ფასდაკლება.
-            </p>
-            <Button variant="secondary" size="lg" className="text-primary hover:text-primary ml-20">
-              იყიდე ახლავე
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-white">
+    <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
@@ -58,7 +40,7 @@ export function SpecialOffer() {
           </div>
         </div>
       </section>
-    </main>
   )
 }
 
+export default Info;
