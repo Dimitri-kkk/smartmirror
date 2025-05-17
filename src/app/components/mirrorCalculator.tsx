@@ -1,0 +1,181 @@
+"use client"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Form } from "@/components/ui/form"
+import MirrorTypeForm from "./mirror-calculator/mirrorType"
+import MirrorSizeForm from "./mirror-calculator/mirrorSize"
+import MirrorEdgesForm from "./mirror-calculator/mirrorEdges"
+import MirrorMountingForm from "./mirror-calculator/mirrorMount"
+import MirrorSummaryForm from "./mirror-calculator/mirrorSummary"
+import { calculateMirrorPrice } from "@/lib/price-calculator"
+
+// Define the form schema for all steps
+const formSchema = z.object({
+  // Step 1: Mirror Type
+  mirrorType: z.enum([
+    "მართკუთხედი",
+    "მრგვალი",
+    "მართკუთხედი მომრგვალებული კუთხეებით",
+    "მართკუთხედი სრულად მომრგვალებული კუთხეებით",
+    "ელიფსური",
+  ]),
+
+  // Step 2: Mirror Size
+  width: z.number().min(10).max(300),
+  height: z.number().min(10).max(300),
+  diameter: z.number().min(10).max(300).optional(),
+
+  // Step 3: Mirror Edges
+  edgeType: z.enum(["straight", "beveled", "polished", "custom"]),
+
+  // Step 4: Mirror Mounting
+  mountingType: z.enum(["wall", "standing", "hanging", "custom"]),
+
+  // Step 5: Delivery Information
+  fullName: z.string().min(2).max(100).optional(),
+  email: z.string().email().optional(),
+  phone: z.string().min(9).optional(),
+  address: z.string().min(5).optional(),
+  city: z.string().min(2).optional(),
+  postalCode: z.string().optional(),
+  additionalNotes: z.string().optional(),
+})
+
+type FormData = z.infer<typeof formSchema>
+
+export default function MirrorCalculator() {
+  const [step, setStep] = useState(1)
+  const [calculatedPrice, setCalculatedPrice] = useState(0)
+  const router = useRouter()
+
+  // Initialize form with default values
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      mirrorType: "მართკუთხედი",
+      width: 50,
+      height: 70,
+      diameter: 50,
+      edgeType: "straight",
+      mountingType: "wall",
+      fullName: "",
+      email: "",
+      phone: "",
+      address: "",
+      city: "",
+      postalCode: "",
+      additionalNotes: "",
+    },
+  })
+
+  const { watch } = form
+  const currentValues = watch()
+
+  // Handle next step
+  const handleNext = async () => {
+    if (step < 5) {
+      setStep(step + 1)
+    } else {
+      // Calculate final price before submission
+      const price = calculateMirrorPrice(currentValues)
+      setCalculatedPrice(price)
+
+      // Submit form
+      await handleSubmit()
+    }
+  }
+
+  // Handle previous step
+  const handlePrevious = () => {
+    if (step > 1) {
+      setStep(step - 1)
+    }
+  }
+
+  // Handle form submission
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("/api/submit-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...currentValues,
+          calculatedPrice,
+        }),
+      })
+
+      if (response.ok) {
+        // Redirect to success page
+        router.push("/thank-you")
+      } else {
+        console.error("Submission failed")
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+    }
+  }
+
+  // Render the current step
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <MirrorTypeForm form={form} />
+      case 2:
+        return <MirrorSizeForm form={form} />
+      case 3:
+        return <MirrorEdgesForm form={form} />
+      case 4:
+        return <MirrorMountingForm form={form} />
+      case 5:
+        return (
+          <MirrorSummaryForm form={form} calculatedPrice={calculatedPrice || calculateMirrorPrice(currentValues)} />
+        )
+      default:
+        return <MirrorTypeForm form={form} />
+    }
+  }
+
+  return (
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold">სარკის ფასის კალკულატორი</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="mb-6">
+          <div className="text-sm font-medium">Page {step} of 5</div>
+          <div className="w-full bg-gray-200 h-2 mt-2 rounded-full overflow-hidden">
+            <div className="bg-blue-600 h-full rounded-full" style={{ width: `${(step / 5) * 100}%` }}></div>
+          </div>
+        </div>
+
+        <Form {...form}>
+          <form onSubmit={(e) => e.preventDefault()}>
+            {renderStep()}
+
+            <div className="flex justify-between mt-8">
+              {step > 1 ? (
+                <Button type="button" variant="outline" onClick={handlePrevious}>
+                  უკან
+                </Button>
+              ) : (
+                <div></div>
+              )}
+
+              <Button type="button" onClick={handleNext}>
+                {step < 5 ? "შემდეგი" : "შეკვეთის გაკეთება"}
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
+  )
+}

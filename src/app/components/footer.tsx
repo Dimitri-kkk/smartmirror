@@ -86,8 +86,8 @@ export default function Footer() {
       <div className="bg-white">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm">
-            <p className="text-black text-sm">COPYRIGHT © 2025 ბაზარი სარკე</p>
-            <p className="text-black text-sm">POWERED BY ბაზარი სარკე</p>
+            <p className="text-black text-sm">COPYRIGHT © 2025 ჭკვიანი სარკე</p>
+            <p className="text-black text-sm">POWERED BY ჭკვიანი სარკე</p>
           </div>
         </div>
       </div>
