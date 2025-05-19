@@ -3,15 +3,17 @@
 import type { UseFormReturn } from "react-hook-form"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
+import type { FormData } from "@/app/types"
 
 interface MirrorEdgesFormProps {
-  form: UseFormReturn<any>
+  form: UseFormReturn<FormData>
 }
 
 export default function MirrorEdgesForm({ form }: MirrorEdgesFormProps) {
   const { control, watch } = form
   const edgeType = watch("edgeType")
-  const showAdditionalOptions = edgeType === "beveled" || edgeType === "polished" || edgeType === "custom"
+  // Only show additional options for "beveled", "polished", or "custom", but NOT for "straight"
+  const showAdditionalOptions = edgeType !== "straight"
 
   return (
     <div className="space-y-6">

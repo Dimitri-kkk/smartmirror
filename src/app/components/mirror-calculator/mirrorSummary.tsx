@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Card, CardContent } from "@/components/ui/card"
+import { FormData } from "@/app/types"
 
 interface MirrorSummaryFormProps {
-  form: UseFormReturn<any>
+  form: UseFormReturn<FormData>
   calculatedPrice: number
 }
 
@@ -52,7 +53,7 @@ export default function MirrorSummaryForm({ form, calculatedPrice }: MirrorSumma
 
   // Get dimensions display based on mirror type
   const getDimensionsDisplay = () => {
-    if (values.mirrorType === "round") {
+    if (values.mirrorType === "მრგვალი") {
       return `Diameter: ${values.diameter} cm`
     } else {
       return `Width: ${values.width} cm, Height: ${values.height} cm`

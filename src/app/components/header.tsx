@@ -1,14 +1,15 @@
 import React from 'react';
 import Link  from 'next/link';
+import Image from 'next/image';
 
 function Header() {
   return (
     <header className="absolute top-0 left-0 w-full p-4 flex justify-around items-center">
         <div>
-          <a href="/">
-            <img src="/smart.png" />
+          <Link href="/">
+            <Image alt="smartmirror" width={100} height={100} src="/smart.png" />
             <h1 className="text-2xl font-bold text-white">ჭკვიანი სარკე</h1>
-          </a>
+          </Link>
         </div>
         <nav>
           <ul className="flex space-x-4 mb-5">

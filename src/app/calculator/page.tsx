@@ -1,4 +1,3 @@
-import AboutUs from "../components/aboutUs";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Info from "../components/info";

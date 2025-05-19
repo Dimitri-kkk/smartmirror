@@ -1,16 +1,6 @@
 "use client"
 
-import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api"
 
-const mapContainerStyle = {
-  width: "100%",
-  height: "400px",
-}
-
-const center = {
-  lat: 41.8023188,
-  lng: 44.793955,
-}
 
 function Map() {
   return (

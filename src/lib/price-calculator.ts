@@ -12,11 +12,11 @@ interface MirrorOptions {
   // Base prices for different mirror types (per square cm)
   const BASE_PRICES = {
     rectangular: 0.0175,
-    round: 0.0275,
-    oval: 0.07,
-    rectangularRoundedCorners: 0.065,
-    rectangularIrregularCorners: 0.075,
-    custom: 0.09,
+    round: 0.0215,
+    oval: 0.0175,
+    rectangularRoundedCorners: 0.0175,
+    rectangularIrregularCorners: 0.0175,
+    custom: 0.0175,
   }
   
   // Multipliers for different edge types

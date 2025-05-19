@@ -3,20 +3,23 @@
 import type { UseFormReturn } from "react-hook-form"
 import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { FormData } from "@/app/types"
 
 interface MirrorMountingFormProps {
-  form: UseFormReturn<any>
+  form: UseFormReturn<FormData>
 }
 
 export default function MirrorMountingForm({ form }: MirrorMountingFormProps) {
   const { control } = form
 
-  const mountingOptions = [
-    { name: "Wall Mount", field: "wallMount" },
-    { name: "Standing Mirror", field: "standingMirror" },
-    { name: "Hanging Mirror", field: "hangingMirror" },
-    { name: "Custom Mounting", field: "customMounting" },
-  ]
+  const mountingOptions: { name: string; field: keyof FormData }[] = [
+    { name: "touchSensor", field: "touchSensor" },
+    { name: "antiFog", field: "antiFog" },
+    { name: "dashboard", field: "dashboard" },
+    { name: "weather", field: "weather" },
+]
+
+
 
   return (
     <div className="space-y-6">
@@ -32,13 +35,13 @@ export default function MirrorMountingForm({ form }: MirrorMountingFormProps) {
               <FormItem>
                 <FormLabel>{name}</FormLabel>
                 <FormControl>
-                  <Select value={formField.value} onValueChange={formField.onChange}>
+                  <Select value={String(formField.value)} onValueChange={formField.onChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select Yes or No" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="no">No</SelectItem>
-                      <SelectItem value="yes">Yes</SelectItem>
+                      <SelectItem value="no">არა</SelectItem>
+                      <SelectItem value="yes">კი</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>

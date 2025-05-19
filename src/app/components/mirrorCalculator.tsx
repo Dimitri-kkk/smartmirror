@@ -37,6 +37,12 @@ const formSchema = z.object({
   // Step 4: Mirror Mounting
   mountingType: z.enum(["wall", "standing", "hanging", "custom"]),
 
+  // Features - using non-optional enums with defaults
+  touchSensor: z.enum(["yes", "no"]),
+  antiFog: z.enum(["yes", "no"]),
+  dashboard: z.enum(["yes", "no"]),
+  weather: z.enum(["yes", "no"]),
+
   // Step 5: Delivery Information
   fullName: z.string().min(2).max(100).optional(),
   email: z.string().email().optional(),
@@ -55,7 +61,7 @@ export default function MirrorCalculator() {
   const router = useRouter()
 
   // Initialize form with default values
-  const form = useForm<FormData>({
+  const mirrorParams = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       mirrorType: "მართკუთხედი",
@@ -64,6 +70,13 @@ export default function MirrorCalculator() {
       diameter: 50,
       edgeType: "straight",
       mountingType: "wall",
+
+      // Set explicit default values for these fields
+      touchSensor: "no",
+      antiFog: "no",
+      dashboard: "no",
+      weather: "no",
+
       fullName: "",
       email: "",
       phone: "",
@@ -74,7 +87,7 @@ export default function MirrorCalculator() {
     },
   })
 
-  const { watch } = form
+  const { watch } = mirrorParams
   const currentValues = watch()
 
   // Handle next step
@@ -101,7 +114,7 @@ export default function MirrorCalculator() {
   // Handle form submission
   const handleSubmit = async () => {
     try {
-      const response = await fetch("/api/submit-order", {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +127,8 @@ export default function MirrorCalculator() {
 
       if (response.ok) {
         // Redirect to success page
-        router.push("/thank-you")
+        router.push("/")
+        console.log(currentValues)
       } else {
         console.error("Submission failed")
       }
@@ -127,19 +141,22 @@ export default function MirrorCalculator() {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <MirrorTypeForm form={form} />
+        return <MirrorTypeForm form={mirrorParams} />
       case 2:
-        return <MirrorSizeForm form={form} />
+        return <MirrorSizeForm form={mirrorParams} />
       case 3:
-        return <MirrorEdgesForm form={form} />
+        return <MirrorEdgesForm form={mirrorParams} />
       case 4:
-        return <MirrorMountingForm form={form} />
+        return <MirrorMountingForm form={mirrorParams} />
       case 5:
         return (
-          <MirrorSummaryForm form={form} calculatedPrice={calculatedPrice || calculateMirrorPrice(currentValues)} />
+          <MirrorSummaryForm
+            form={mirrorParams}
+            calculatedPrice={calculatedPrice || calculateMirrorPrice(currentValues)}
+          />
         )
       default:
-        return <MirrorTypeForm form={form} />
+        return <MirrorTypeForm form={mirrorParams} />
     }
   }
 
@@ -156,7 +173,7 @@ export default function MirrorCalculator() {
           </div>
         </div>
 
-        <Form {...form}>
+        <Form {...mirrorParams}>
           <form onSubmit={(e) => e.preventDefault()}>
             {renderStep()}
 

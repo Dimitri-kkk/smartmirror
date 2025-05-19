@@ -3,18 +3,19 @@
 import type { UseFormReturn } from "react-hook-form"
 import { Input } from "@/components/ui/input"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { FormData } from "@/app/types"
 
 interface MirrorSizeFormProps {
-  form: UseFormReturn<any>
+  form: UseFormReturn<FormData>
 }
 
 export default function MirrorSizeForm({ form }: MirrorSizeFormProps) {
   const { control, watch } = form
   const mirrorType = watch("mirrorType")
 
-  const isRound = mirrorType === "round"
+  const isRound = mirrorType === "მრგვალი"
   const isRectangular = ["rectangular", "rectangularRoundedCorners", "rectangularIrregularCorners"].includes(mirrorType)
-  const isOval = mirrorType === "oval"
+  const isOval = mirrorType === "ელიფსური"
 
   return (
     <div className="space-y-6">
