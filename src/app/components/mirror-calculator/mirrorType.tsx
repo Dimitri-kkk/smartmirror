@@ -4,9 +4,10 @@ import type { UseFormReturn } from "react-hook-form"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
+import { FormData } from "@/app/types"
 
 interface MirrorTypeFormProps {
-  form: UseFormReturn<any>
+  form: UseFormReturn<FormData>
 }
 
 export default function MirrorTypeForm({ form }: MirrorTypeFormProps) {
@@ -26,8 +27,8 @@ export default function MirrorTypeForm({ form }: MirrorTypeFormProps) {
                 <FormItem className="flex items-start space-x-3 space-y-0">
                   <FormControl>
                     <Checkbox
-                      checked={field.value === "rectangular"}
-                      onCheckedChange={() => field.onChange("rectangular")}
+                      checked={field.value === "მართკუთხედი"}
+                      onCheckedChange={() => field.onChange("მართკუთხედი")}
                     />
                   </FormControl>
                   <FormLabel className="font-normal">მართკუთხედი</FormLabel>
@@ -35,14 +36,14 @@ export default function MirrorTypeForm({ form }: MirrorTypeFormProps) {
 
                 <FormItem className="flex items-start space-x-3 space-y-0">
                   <FormControl>
-                    <Checkbox checked={field.value === "round"} onCheckedChange={() => field.onChange("round")} />
+                    <Checkbox checked={field.value === "მრგვალი"} onCheckedChange={() => field.onChange("მრგვალი")} />
                   </FormControl>
                   <FormLabel className="font-normal">მრგვალი</FormLabel>
                 </FormItem>
 
                 <FormItem className="flex items-start space-x-3 space-y-0">
                   <FormControl>
-                    <Checkbox checked={field.value === "oval"} onCheckedChange={() => field.onChange("oval")} />
+                    <Checkbox checked={field.value === "მართკუთხედი მომრგვალებული კუთხეებით"} onCheckedChange={() => field.onChange("მართკუთხედი მომრგვალებული კუთხეებით")} />
                   </FormControl>
                   <FormLabel className="font-normal">მართკუთხედი მომრგვალებული კუთხეებით</FormLabel>
                 </FormItem>
@@ -50,8 +51,8 @@ export default function MirrorTypeForm({ form }: MirrorTypeFormProps) {
                 <FormItem className="flex items-start space-x-3 space-y-0">
                   <FormControl>
                     <Checkbox
-                      checked={field.value === "rectangularRoundedCorners"}
-                      onCheckedChange={() => field.onChange("rectangularRoundedCorners")}
+                      checked={field.value === "მართკუთხედი სრულად მომრგვალებული კუთხეებით"}
+                      onCheckedChange={() => field.onChange("მართკუთხედი სრულად მომრგვალებული კუთხეებით")}
                     />
                   </FormControl>
                   <FormLabel className="font-normal">მართკუთხედი სრულად მომრგვალებული კუთხეებით</FormLabel>
@@ -60,8 +61,8 @@ export default function MirrorTypeForm({ form }: MirrorTypeFormProps) {
                 <FormItem className="flex items-start space-x-3 space-y-0">
                   <FormControl>
                     <Checkbox
-                      checked={field.value === "rectangularIrregularCorners"}
-                      onCheckedChange={() => field.onChange("rectangularIrregularCorners")}
+                      checked={field.value === "ელიფსური"}
+                      onCheckedChange={() => field.onChange("ელიფსური")}
                     />
                   </FormControl>
                   <FormLabel className="font-normal">ელიფსური</FormLabel>
