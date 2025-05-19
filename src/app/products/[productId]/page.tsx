@@ -4,11 +4,11 @@ import { notFound } from "next/navigation"
 import AddToCartButton from "@/app/components/add-to-cart-button"
 import Footer from "@/app/components/footer"
 
-interface ProductPageProps {
-  params: {
-    productId: string;
-  };
-}
+import { type Metadata, type ResolvingMetadata } from "next";
+
+type Props = {
+  params: { productId: string };
+};
 
 
 // Sample product data - replace with your actual data source
@@ -69,7 +69,7 @@ const products = [
   },
 ]
 
-export default function ProductPage({ params }: ProductPageProps) {
+export default function ProductPage({ params }: Props) {
   // Convert the productId from string to number
   const productId = parseInt(params.productId, 10)
   
