@@ -35,7 +35,7 @@ export default function ProductsPage() {
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {/* Product 1 */}
         <div className="group">
-          <Link href="/products/1" className="block overflow-hidden">
+          <Link href="/products/mirror1" className="block overflow-hidden">
             <div className="aspect-square overflow-hidden">
               <Image
                 src="/pirveli.jpg"
@@ -55,7 +55,7 @@ export default function ProductsPage() {
 
         {/* Product 2 */}
         <div className="group">
-          <Link href="/products/2" className="block overflow-hidden">
+          <Link href="/products/mirror2" className="block overflow-hidden">
             <div className="aspect-square overflow-hidden">
               <Image
                 src="/meore.jpg"
@@ -75,7 +75,7 @@ export default function ProductsPage() {
 
         {/* Product 3 */}
         <div className="group">
-          <Link href="/products/3" className="block overflow-hidden">
+          <Link href="/products/mirror3" className="block overflow-hidden">
             <div className="aspect-square overflow-hidden">
               <Image
                 src="/mesame.png"
@@ -95,7 +95,7 @@ export default function ProductsPage() {
 
         {/* Product 4 */}
         <div className="group">
-          <Link href="/products/4" className="block overflow-hidden">
+          <Link href="/products/mirror4" className="block overflow-hidden">
             <div className="aspect-square overflow-hidden">
               <Image
                 src="/meotxe.png"
@@ -115,7 +115,7 @@ export default function ProductsPage() {
 
         {/* Product 5 */}
         <div className="group">
-          <Link href="/products/5" className="block overflow-hidden">
+          <Link href="/products/mirror5" className="block overflow-hidden">
             <div className="aspect-square overflow-hidden">
               <Image
                 src="/meeqvse.jpg"
