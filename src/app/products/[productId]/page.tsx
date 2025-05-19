@@ -69,7 +69,7 @@ const products = [
   },
 ]
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default function ProductPage({ params }: ProductPageProps) {
   // Convert the productId from string to number
   const productId = parseInt(params.productId, 10)
   
