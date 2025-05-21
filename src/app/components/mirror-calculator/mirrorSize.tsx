@@ -13,9 +13,9 @@ export default function MirrorSizeForm({ form }: MirrorSizeFormProps) {
   const { control, watch } = form
   const mirrorType = watch("mirrorType")
 
-  const isRound = mirrorType === "მრგვალი"
-  const isRectangular = ["rectangular", "rectangularRoundedCorners", "rectangularIrregularCorners"].includes(mirrorType)
-  const isOval = mirrorType === "ელიფსური"
+  const isRound = mirrorType === "round"
+  const isRectangular = ["rectangular", "rectangularRoundedCorners", "rectangularIrregularCorners",].includes(mirrorType)
+  const isOval = mirrorType === "elliptical"
 
   return (
     <div className="space-y-6">

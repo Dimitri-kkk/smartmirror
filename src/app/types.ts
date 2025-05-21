@@ -2,11 +2,11 @@ import * as z from "zod"
 
 export const formSchema = z.object({
   mirrorType: z.enum([
-    "მართკუთხედი",
-    "მრგვალი",
-    "მართკუთხედი მომრგვალებული კუთხეებით",
-    "მართკუთხედი სრულად მომრგვალებული კუთხეებით",
-    "ელიფსური",
+    "rectangular",
+    "round",
+    "rectangularRoundedCorners",
+    "rectangularFullyRoundedCorners",
+    "elliptical",
   ]),
   width: z.number().min(10).max(300),
   height: z.number().min(10).max(300),
@@ -14,12 +14,9 @@ export const formSchema = z.object({
   edgeType: z.enum(["straight", "beveled", "polished", "custom"]),
   edgeSubType: z.enum(["option1", "option2", "option3", "option4"]).optional(),
   mountingType: z.enum(["wall", "standing", "hanging", "custom"]),
-  fullName: z.string().min(2).max(100).optional(),
-  email: z.string().email().optional(),
-  phone: z.string().min(9).optional(),
-  address: z.string().min(5).optional(),
-  city: z.string().min(2).optional(),
-  postalCode: z.string().optional(),
+  fullName: z.string().min(2, "სახელი აუცილებელია").max(100),
+  phone: z.string().min(9, "ტელეფონის ნომერი აუცილებელია").max(15),
+  address: z.string().min(2, "მისამართი აუცილებელია").max(200),
   additionalNotes: z.string().optional(),
 
   // Add these new fields for mounting options:

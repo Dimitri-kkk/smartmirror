@@ -53,7 +53,7 @@ export default function MirrorSummaryForm({ form, calculatedPrice }: MirrorSumma
 
   // Get dimensions display based on mirror type
   const getDimensionsDisplay = () => {
-    if (values.mirrorType === "მრგვალი") {
+    if (values.mirrorType === "round") {
       return `Diameter: ${values.diameter} cm`
     } else {
       return `Width: ${values.width} cm, Height: ${values.height} cm`
@@ -93,7 +93,7 @@ export default function MirrorSummaryForm({ form, calculatedPrice }: MirrorSumma
           <div className="mt-6 pt-4 border-t">
             <div className="flex justify-between items-center">
               <span className="text-lg font-medium">Total Price:</span>
-              <span className="text-2xl font-bold">${calculatedPrice.toFixed(2)}</span>
+              <span className="text-2xl font-bold">₾{calculatedPrice.toFixed(2)}</span>
             </div>
           </div>
         </CardContent>
@@ -108,7 +108,7 @@ export default function MirrorSummaryForm({ form, calculatedPrice }: MirrorSumma
             name="fullName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full Name</FormLabel>
+                <FormLabel>შემკვეთის სახელი და გვარი</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your full name" {...field} />
                 </FormControl>
@@ -117,27 +117,12 @@ export default function MirrorSummaryForm({ form, calculatedPrice }: MirrorSumma
             )}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              control={control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email Address</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <FormField
               control={control}
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel>საკონტაქტო ნომერი</FormLabel>
                   <FormControl>
                     <Input placeholder="Enter your phone number" {...field} />
                   </FormControl>
@@ -152,7 +137,7 @@ export default function MirrorSummaryForm({ form, calculatedPrice }: MirrorSumma
             name="address"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Delivery Address</FormLabel>
+                <FormLabel>მისამართი</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your street address" {...field} />
                 </FormControl>
@@ -161,42 +146,12 @@ export default function MirrorSummaryForm({ form, calculatedPrice }: MirrorSumma
             )}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              control={control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your city" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={control}
-              name="postalCode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Postal Code</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your postal code" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
           <FormField
             control={control}
             name="additionalNotes"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Additional Notes</FormLabel>
+                <FormLabel>კომენტარი</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Any special instructions for delivery or installation"
@@ -210,6 +165,5 @@ export default function MirrorSummaryForm({ form, calculatedPrice }: MirrorSumma
           />
         </div>
       </div>
-    </div>
   )
 }

@@ -13,10 +13,10 @@ export default function MirrorMountingForm({ form }: MirrorMountingFormProps) {
   const { control } = form
 
   const mountingOptions: { name: string; field: keyof FormData }[] = [
-    { name: "touchSensor", field: "touchSensor" },
-    { name: "antiFog", field: "antiFog" },
-    { name: "dashboard", field: "dashboard" },
-    { name: "weather", field: "weather" },
+    { name: "შეხების სენსორი", field: "touchSensor" },
+    { name: "ანტიორთქლის სისტემა", field: "antiFog" },
+    { name: "საათისა და ტემპერატურის მაჩვენებელი", field: "dashboard" },
+    { name: "ამინდის პროგნოზი", field: "weather" },
 ]
 
 

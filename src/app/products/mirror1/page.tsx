@@ -32,7 +32,7 @@ export default function Mirror1Page() {
         <div>
           <h1 className="text-3xl font-serif mb-2">{product.name}</h1>
           <div className="text-sm text-muted-foreground mb-4">{product.category}</div>
-          <div className="text-2xl font-semibold mb-6">€{product.price.toFixed(2)}</div>
+          <div className="text-2xl font-semibold mb-6">₾{product.price.toFixed(2)}</div>
           <p className="text-muted-foreground mb-8">{product.description}</p>
 
           <div className="mb-8">

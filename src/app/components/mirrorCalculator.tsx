@@ -19,11 +19,11 @@ import { calculateMirrorPrice } from "@/lib/price-calculator"
 const formSchema = z.object({
   // Step 1: Mirror Type
   mirrorType: z.enum([
-    "მართკუთხედი",
-    "მრგვალი",
-    "მართკუთხედი მომრგვალებული კუთხეებით",
-    "მართკუთხედი სრულად მომრგვალებული კუთხეებით",
-    "ელიფსური",
+    "rectangular",
+    "round",
+    "rectangularRoundedCorners",
+    "rectangularFullyRoundedCorners",
+    "elliptical",
   ]),
 
   // Step 2: Mirror Size
@@ -44,12 +44,9 @@ const formSchema = z.object({
   weather: z.enum(["yes", "no"]),
 
   // Step 5: Delivery Information
-  fullName: z.string().min(2).max(100).optional(),
-  email: z.string().email().optional(),
-  phone: z.string().min(9).optional(),
-  address: z.string().min(5).optional(),
-  city: z.string().min(2).optional(),
-  postalCode: z.string().optional(),
+  fullName: z.string().min(2).max(100),
+  phone: z.string().min(9),
+  address: z.string().min(2),
   additionalNotes: z.string().optional(),
 })
 
@@ -63,10 +60,11 @@ export default function MirrorCalculator() {
   // Initialize form with default values
   const mirrorParams = useForm<FormData>({
     resolver: zodResolver(formSchema),
+    mode:"onTouched",
     defaultValues: {
-      mirrorType: "მართკუთხედი",
-      width: 50,
-      height: 70,
+      mirrorType: "rectangular",
+      width: 100,
+      height: 100,
       diameter: 50,
       edgeType: "straight",
       mountingType: "wall",
@@ -78,11 +76,8 @@ export default function MirrorCalculator() {
       weather: "no",
 
       fullName: "",
-      email: "",
       phone: "",
       address: "",
-      city: "",
-      postalCode: "",
       additionalNotes: "",
     },
   })
@@ -91,16 +86,14 @@ export default function MirrorCalculator() {
   const currentValues = watch()
 
   // Handle next step
-  const handleNext = async () => {
+  const handleNext = () => {
     if (step < 5) {
       setStep(step + 1)
     } else {
       // Calculate final price before submission
       const price = calculateMirrorPrice(currentValues)
       setCalculatedPrice(price)
-
-      // Submit form
-      await handleSubmit()
+      mirrorParams.handleSubmit(handleSubmit)()
     }
   }
 
